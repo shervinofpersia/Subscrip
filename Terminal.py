@@ -57,7 +57,7 @@ CONFIG = {
     "FETCH_WORKERS": 15,         
     "TCP_TIMEOUT": 2,            
     "TCP_WORKERS": 200,          
-    "MAX_OUTPUT_NODES": 600,     
+    "MAX_OUTPUT_NODES": 1000,     
     "OUTPUT_CLASH": "SHΞN™.yaml",
     "OUTPUT_SINGBOX": "SHΞN™.json",
     "OUTPUT_XRAY": "SHΞN™.md",
