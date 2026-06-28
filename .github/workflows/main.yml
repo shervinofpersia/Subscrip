@@ -1,0 +1,46 @@
+name: SHΞN™ Auto Updater
+
+on:
+  push:
+    paths:
+      - 'Terminal.py' # فقط زمانی که این فایل تغییر کرد اجرا شود
+  workflow_dispatch: # دکمه اجرای دستی
+  schedule:
+    - cron: '0 */6 * * *' # اجرای خودکار هر 6 ساعت
+
+jobs:
+  update-configs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # دسترسی لازم برای پوش کردن کامیت
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pyyaml
+
+      - name: Run Script
+        run: python Terminal.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # اضافه کردن فایل‌های خروجی به استیج
+          git add SHΞN™.yaml SHΞN™.json SHΞN™.md
+          
+          # بررسی اینکه آیا تغییری ایجاد شده است یا خیر، سپس کامیت با پیام اختصاصی
+          git diff --quiet && git diff --staged --quiet || git commit -m "☬Exclusive SHΞN™ made"
+          
+          # پوش کردن تغییرات به ریپازیتوری
+          git push
