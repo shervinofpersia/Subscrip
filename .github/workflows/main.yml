@@ -6,7 +6,7 @@ on:
       - 'Terminal.py' # فقط زمانی که این فایل تغییر کرد اجرا شود
   workflow_dispatch: # دکمه اجرای دستی
   schedule:
-    - cron: '0 */6 * * *' # اجرای خودکار هر 6 ساعت
+    - cron: '0 */1 * * *' # اجرای خودکار هر 6 ساعت
 
 jobs:
   update-configs:
